@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00f0ff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HASA | Diver Portal Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #020617;
+            --bg-card: #0f172a;
+            --accent-cyan: #38bdf8;
+            --text-main: #f8fafc;
+            --border-color: rgba(56, 189, 248, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body {
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            padding: 3rem;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .login-card h2 {
+            color: var(--accent-cyan);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .login-card p {
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+        }
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-deep);
+            color: white;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .input-group input:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+        .btn {
+            width: 100%;
+            background: var(--accent-cyan);
+            color: var(--bg-deep);
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+        }
+        .error {
+            color: #ef4444;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            display: none;
+        }
+        .back-link {
+            display: block;
+            margin-top: 1.5rem;
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .back-link:hover { color: var(--accent-cyan); }
+    </style>
+</head>
+<body>
+
+    <div class="login-card">
+        <h2>HASA Portal</h2>
+        <p>Enter diver credentials to access telemetry.</p>
+        
+        <form onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label for="username">Diver ID</label>
+                <input type="text" id="username" placeholder="e.g. diver1" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Security Code</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn">Authenticate</button>
+            <p id="error-msg" class="error">Invalid Diver ID or Security Code.</p>
+        </form>
+
+        <a href="index.html" class="back-link">← Back to Main Site</a>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            
+            // Mock authentication system
+            if(user === 'Aditya' && pass === 'hasa2026') {
+                localStorage.setItem('hasa_authenticated', 'true');
+                window.location.href = 'dashboard.html';
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
